@@ -1251,6 +1251,7 @@ keypress(XEvent *e)
 void
 killclient(const Arg *arg)
 {
+    selmon->hidsel = 0;
 	if (!selmon->sel)
 		return;
 	if (!sendevent(selmon->sel, wmatom[WMDelete])) {

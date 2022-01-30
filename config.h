@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
+
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 6;        /* gaps between windows */
@@ -67,6 +68,7 @@ static const Layout layouts[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define NOSHCMD(...) { .v = (const char*[]){ __VA_ARGS__, NULL } }
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -74,6 +76,8 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 
 #include "movestack.c"
+#include <X11/XF86keysym.h>
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -81,8 +85,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstackvis,  {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstackvis,  {.i = -1 } },
-	{ MODKEY|ControlMask,             XK_j,      focusstackhid,  {.i = +1 } },
-	{ MODKEY|ControlMask,             XK_k,      focusstackhid,  {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_j,      focusstackhid,  {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_k,      focusstackhid,  {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
@@ -129,6 +133,15 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
+
+    //Applications
+    { MODKEY,                       XK_w,      spawn,          NOSHCMD("firefox") },
+    { 0,         XF86XK_AudioLowerVolume,      spawn,          NOSHCMD("volnotify", "-5%") },
+    { 0,         XF86XK_AudioRaiseVolume,      spawn,          NOSHCMD("volnotify", "+5%") },
+    { 0,                XF86XK_AudioMute,      spawn,          NOSHCMD("volnotify", "mute") },
+    { 0,                XF86XK_AudioPlay,      spawn,          NOSHCMD("playerctl", "play-pause") },
+    { 0,                XF86XK_AudioPrev,      spawn,          NOSHCMD("playerctl", "previous") },
+    { 0,                XF86XK_AudioNext,      spawn,          NOSHCMD("playerctl", "next") }
 };
 
 /* button definitions */

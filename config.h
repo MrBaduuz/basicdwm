@@ -5,6 +5,7 @@
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 6;        /* gaps between windows */
 static const unsigned int snap      = 0;       /* snap pixel */
+static const unsigned int tag_space = 8;        /* spacing between tags */
 static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -24,13 +25,15 @@ static const char col_blue1[]       = "#5e81ac";
 static const char col_blue2[]       = "#81a1c1";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_white, col_gray2, col_gray2 },
-	[SchemeSel]  = { col_white, col_red  , col_orange},
-	[SchemeHid] =  { col_red,   col_gray2, col_gray2 },
+	[SchemeNorm]    = { col_white, col_gray2, col_gray2 },
+	[SchemeSel]     = { col_white, col_red  , col_orange},
+	[SchemeHid]     = { col_red,   col_gray2, col_gray2 },
+    [TagSchemeNorm] = { col_white, col_gray2, col_gray2 },
+    [TagSchemeSel]  = { col_red,   col_gray2, col_red  }
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):

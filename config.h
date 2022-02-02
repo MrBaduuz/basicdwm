@@ -4,8 +4,9 @@
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 6;        /* gaps between windows */
-static const unsigned int snap      = 0;       /* snap pixel */
+static const unsigned int snap      = 0;        /* snap pixel */
 static const unsigned int tag_space = 8;        /* spacing between tags */
+static const unsigned int status_space = 8;     /* spacing between status items */
 static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -33,6 +34,20 @@ static const char *colors[][3]      = {
 };
 
 static const char *tag_colors[][3]  = {
+	/* fg          bg         border   */
+    { col_red,     col_gray3, col_gray3 },
+    { col_orange,  col_gray3, col_gray3 },
+    { col_yellow,  col_gray3, col_gray3 },
+    { col_green,   col_gray3, col_gray3 },
+    { col_magenta, col_gray3, col_gray3 },
+    { col_red,     col_gray3, col_gray3 },
+    { col_orange,  col_gray3, col_gray3 },
+    { col_yellow,  col_gray3, col_gray3 },
+    { col_green,   col_gray3, col_gray3 },
+    { col_magenta, col_gray3, col_gray3 }
+};
+
+static const char *status_colors[][3]  = {
 	/* fg          bg         border   */
     { col_red,     col_gray3, col_gray3 },
     { col_orange,  col_gray3, col_gray3 },

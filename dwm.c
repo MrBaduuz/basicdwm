@@ -183,6 +183,7 @@ static void detachstack(Client *c);
 static Monitor *dirtomon(int dir);
 static void drawbar(Monitor *m);
 static void drawbars(void);
+static int drawstatus(Monitor* m, char* text);
 static void enternotify(XEvent *e);
 static void expose(XEvent *e);
 static void focus(Client *c);
@@ -306,6 +307,7 @@ static int running = 1;
 static Cur *cursor[CurLast];
 static Clr **scheme;
 static Clr **tag_scheme;
+static Clr **status_scheme;
 static Display *dpy;
 static Drw *drw;
 static Monitor *mons, *selmon;
@@ -570,8 +572,10 @@ buttonpress(XEvent *e)
 						x += (1.0 / (double)m->bt) * m->btw;
 				} while (ev->x > x && (c = c->next));
 
-				click = ClkWinTitle;
-				arg.v = c;
+                if (c) {
+                    click = ClkWinTitle;
+                    arg.v = c;
+                }
 			}
 		}
 	} else if ((c = wintoclient(ev->window))) {
@@ -842,6 +846,40 @@ dirtomon(int dir)
 	return m;
 }
 
+int
+drawstatus(Monitor* m, char* text)
+{
+    int tw = 0;
+    char *substr;
+    int len = strlen(stext);
+    if (!(substr = (char*) malloc(len*sizeof(char))))
+        die("malloc");
+    int last = len-1;
+    int index = 0;
+    for (int i = last; i >= 0; i--) {
+        if (stext[i] == '^') {
+            strncpy(substr, stext+i+1, last-i);
+            substr[last-i] = '\0';
+            last = i-1;
+            tw += TEXTW(substr)+status_space;
+            drw_setscheme(drw, status_scheme[index % LENGTH(status_colors)]);
+            drw_text(drw, m->ww-tw, 0, TEXTW(substr)+status_space, bh, (lrpad+status_space)/2, substr, 0);
+            drw_rect(drw, m->ww-tw+status_space/2, bh-3, TEXTW(substr), 3, 1, 0);
+            index++;
+        }
+    }
+    if (last >= 0) {
+        strncpy(substr, stext, last+1);
+        substr[last+1] = '\0';
+        tw += TEXTW(substr)+status_space;
+        drw_setscheme(drw, status_scheme[index % LENGTH(status_colors)]);
+        drw_text(drw, m->ww-tw, 0, TEXTW(substr)+status_space, bh, (lrpad+status_space)/2, substr, 0);
+        drw_rect(drw, m->ww-tw+status_space/2, bh-3, TEXTW(substr), 3, 1, 0);
+    }
+    free(substr);
+    return tw;
+}
+
 void
 drawbar(Monitor *m)
 {
@@ -854,9 +892,7 @@ drawbar(Monitor *m)
 
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon || 1) { /* status is only drawn on selected monitor */
-		drw_setscheme(drw, scheme[SchemeNorm]);
-		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
-		drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
+        tw = drawstatus(m, stext);
 	}
 
 	for (c = m->clients; c; c = c->next) {
@@ -1988,6 +2024,9 @@ setup(void)
 	tag_scheme = ecalloc(LENGTH(tags), sizeof(Clr *));
 	for (i = 0; i < LENGTH(tags); i++)
 		tag_scheme[i] = drw_scm_create(drw, tag_colors[i], 3);
+	status_scheme = ecalloc(LENGTH(tags), sizeof(Clr *));
+	for (i = 0; i < LENGTH(tags); i++)
+		status_scheme[i] = drw_scm_create(drw, status_colors[i], 3);
 	/* init bars */
 	updatebars();
 	updatestatus();

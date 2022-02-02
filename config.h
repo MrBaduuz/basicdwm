@@ -12,9 +12,9 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh            = 0;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const char *fonts[]          = { "DejaVu Sans:size=10", "Fira Code:size=10.5", "Symbols Nerd Font:size=10.7" };
 static const char dmenufont[]       = "Fira Code:size=10";
-static const char col_gray1[]       = "#434c5e";
-static const char col_gray2[]       = "#3b4252";
-static const char col_gray3[]       = "#2e3440";
+static const char col_gray1[]       = "#a6aab2";
+static const char col_gray2[]       = "#434c5e";
+static const char col_gray3[]       = "#3b4252";
 static const char col_white[]       = "#e5e9f0";
 static const char col_red[]         = "#bf6161";
 static const char col_orange[]      = "#d08770";
@@ -25,11 +25,24 @@ static const char col_blue1[]       = "#5e81ac";
 static const char col_blue2[]       = "#81a1c1";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm]    = { col_white, col_gray2, col_gray2 },
+	[SchemeNorm]    = { col_white, col_gray3, col_gray3 },
 	[SchemeSel]     = { col_white, col_red  , col_orange},
-	[SchemeHid]     = { col_red,   col_gray2, col_gray2 },
-    [TagSchemeNorm] = { col_white, col_gray2, col_gray2 },
-    [TagSchemeSel]  = { col_red,   col_gray2, col_red  }
+	[SchemeHid]     = { col_red,   col_gray3, col_gray3 },
+    [TagSchemeNorm] = { col_gray1, col_gray3, col_gray3 },
+};
+
+static const char *tag_colors[][3]  = {
+	/* fg          bg         border   */
+    { col_red,     col_gray3, col_gray3 },
+    { col_orange,  col_gray3, col_gray3 },
+    { col_yellow,  col_gray3, col_gray3 },
+    { col_green,   col_gray3, col_gray3 },
+    { col_magenta, col_gray3, col_gray3 },
+    { col_red,     col_gray3, col_gray3 },
+    { col_orange,  col_gray3, col_gray3 },
+    { col_yellow,  col_gray3, col_gray3 },
+    { col_green,   col_gray3, col_gray3 },
+    { col_magenta, col_gray3, col_gray3 }
 };
 
 /* tagging */

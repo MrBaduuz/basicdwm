@@ -22,7 +22,20 @@ static const char *colors[][3]      = {
 	[SchemeSel]     = { col_gray4, col_cyan,  col_cyan  },
 	[SchemeHid]     = { col_cyan,  col_gray1, col_cyan  },
     [TagSchemeNorm] = { col_gray3, col_gray1, col_gray4 },
-    [TagSchemeSel]  = { col_cyan,  col_gray1, col_cyan  }
+};
+
+static const char *tag_colors[][3]  = {
+	/* fg        bg        border   */
+	{ col_cyan, col_gray1, col_cyan },
+	{ col_cyan, col_cyan,  col_cyan  },
+	{ col_cyan, col_gray1, col_cyan  },
+    { col_cyan, col_gray1, col_cyan },
+	{ col_cyan, col_gray1, col_cyan },
+	{ col_cyan, col_cyan,  col_cyan  },
+	{ col_cyan, col_gray1, col_cyan  },
+    { col_cyan, col_gray1, col_cyan },
+	{ col_cyan, col_gray1, col_cyan  },
+    { col_cyan, col_gray1, col_cyan }
 };
 
 /* tagging */

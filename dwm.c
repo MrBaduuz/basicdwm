@@ -305,6 +305,7 @@ static int restart = 0;
 static int running = 1;
 static Cur *cursor[CurLast];
 static Clr **scheme;
+static Clr **tag_scheme;
 static Display *dpy;
 static Drw *drw;
 static Monitor *mons, *selmon;
@@ -547,7 +548,7 @@ buttonpress(XEvent *e)
 	if (ev->window == selmon->barwin) {
 		i = x = 0;
 		do
-			x += TEXTW(tags[i]);
+			x += TEXTW(tags[i])+tag_space;
 		while (ev->x >= x && ++i < LENGTH(tags));
 		if (i < LENGTH(tags)) {
 			click = ClkTagBar;
@@ -869,7 +870,7 @@ drawbar(Monitor *m)
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]) + tag_space;
         if (m->tagset[m->seltags] & 1 << i || occ & 1 << i)
-            drw_setscheme(drw, scheme[TagSchemeSel]);
+            drw_setscheme(drw, tag_scheme[i]);
         else
             drw_setscheme(drw, scheme[TagSchemeNorm]);
 		drw_text(drw, x, 0, w, bh, (lrpad+tag_space) / 2, tags[i], urg & 1 << i);
@@ -1984,6 +1985,9 @@ setup(void)
 	scheme = ecalloc(LENGTH(colors), sizeof(Clr *));
 	for (i = 0; i < LENGTH(colors); i++)
 		scheme[i] = drw_scm_create(drw, colors[i], 3);
+	tag_scheme = ecalloc(LENGTH(tags), sizeof(Clr *));
+	for (i = 0; i < LENGTH(tags); i++)
+		tag_scheme[i] = drw_scm_create(drw, tag_colors[i], 3);
 	/* init bars */
 	updatebars();
 	updatestatus();

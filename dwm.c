@@ -68,7 +68,7 @@
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
 enum { SchemeNorm, SchemeSel, SchemeHid,
-       TagSchemeNorm, TagSchemeSel }; /* color schemes */
+       SchemeLayout, TagSchemeNorm }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
@@ -878,8 +878,8 @@ drawbar(Monitor *m)
             drw_rect(drw, x+tag_space/2, bh-3, w-tag_space, 3, 1, 0);
 		x += w;
 	}
-	w = TEXTW(m->ltsymbol);
-	drw_setscheme(drw, scheme[SchemeNorm]);
+	w = blw = TEXTW(m->ltsymbol);
+	drw_setscheme(drw, scheme[SchemeLayout]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
 	if ((w = m->ww - tw - x) > bh) {

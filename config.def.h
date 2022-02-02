@@ -21,6 +21,7 @@ static const char *colors[][3]      = {
 	[SchemeNorm]    = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]     = { col_gray4, col_cyan,  col_cyan  },
 	[SchemeHid]     = { col_cyan,  col_gray1, col_cyan  },
+	[SchemeLayout]  = { col_gray3, col_gray1, col_gray2  },
     [TagSchemeNorm] = { col_gray3, col_gray1, col_gray4 },
 };
 

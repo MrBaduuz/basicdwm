@@ -2071,7 +2071,11 @@ show(const Arg *arg)
 {
 	if (selmon->hidsel)
 		selmon->hidsel = 0;
-	showwin(selmon->sel);
+    if (!selmon->sel) {
+        showwin(selmon->clients);
+		focus(selmon->clients);
+		restack(selmon);
+    }
 }
 
 void

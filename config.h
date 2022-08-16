@@ -27,7 +27,7 @@ static const char col_blue2[]       = "#81a1c1";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm]    = { col_white, col_gray3, col_gray3 },
-	[SchemeSel]     = { col_white, col_red  , col_orange},
+	[SchemeSel]     = { col_white, col_red  , col_red   },
 	[SchemeHid]     = { col_red,   col_gray3, col_gray3 },
 	[SchemeLayout]  = { col_blue1, col_gray3, col_gray3 },
     [TagSchemeNorm] = { col_gray1, col_gray3, col_gray3 },
@@ -70,10 +70,15 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1 },
+    { NULL,      NULL,     NULL,           0,         0,          0,           1,        -1 }, /* by default no swallowing */
+	{ "Gimp",    NULL,     NULL,           1 << 7,         0,          0,           0,        -1 },
 	{ "firefox", NULL,     NULL,           1 << 2,    0,          0,          -1,        -1 },
-	{ "st-256color",      NULL,     NULL,           0,         0,          1,           0,        -1 },
-	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+	{ "st-256color", NULL, NULL,           0,         0,          1,           0,        -1 },
+    /* swallow */
+    { "mpv",     NULL,     NULL,           0,         0,          0,           0,        -1 },
+    { "Sxiv",    NULL,     NULL,           0,         0,          0,           0,        -1 },
+    { "pcmanfm", NULL,     NULL,        0,         0,          0,           0,        -1 },
+    { "Zathura", NULL,     NULL,        0,         0,          0,           0,        -1 },
 };
 
 /* layout(s) */
@@ -104,7 +109,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray2, "-nf", col_white, "-sb", col_red, "-sf", col_white, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-F", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray2, "-nf", col_white, "-sb", col_red, "-sf", col_white, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 #include "movestack.c"
@@ -131,6 +136,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+    { MODKEY,                       XK_x,      spawn,          NOSHCMD("xkill") },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },

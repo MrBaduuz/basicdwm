@@ -183,7 +183,7 @@ static void detachstack(Client *c);
 static Monitor *dirtomon(int dir);
 static void drawbar(Monitor *m);
 static void drawbars(void);
-static int drawstatus(Monitor* m, char* text);
+static int drawstatus(Monitor* m);
 static void enternotify(XEvent *e);
 static void expose(XEvent *e);
 static void focus(Client *c);
@@ -847,16 +847,17 @@ dirtomon(int dir)
 }
 
 int
-drawstatus(Monitor* m, char* text)
+drawstatus(Monitor* m)
 {
     int tw = 0;
     char *substr;
     int len = strlen(stext);
-    if (!(substr = (char*) malloc(len*sizeof(char))))
+    if (!(substr = malloc(len*sizeof(char))))
         die("malloc");
     int last = len-1;
     int index = 0;
-    for (int i = last; i >= 0; i--) {
+	int i;
+    for (i = last; i >= 0; i--) {
         if (stext[i] == '^') {
             strncpy(substr, stext+i+1, last-i);
             substr[last-i] = '\0';
@@ -892,7 +893,7 @@ drawbar(Monitor *m)
 
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon || 1) { /* status is only drawn on selected monitor */
-        tw = drawstatus(m, stext);
+        tw = drawstatus(m);
 	}
 
 	for (c = m->clients; c; c = c->next) {

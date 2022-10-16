@@ -621,7 +621,13 @@ cleanup(void)
 		drw_cur_free(drw, cursor[i]);
 	for (i = 0; i < LENGTH(colors); i++)
 		free(scheme[i]);
+	for (i = 0; i < LENGTH(tag_colors); i++)
+		free(tag_scheme[i]);
+	for (i = 0; i < LENGTH(status_colors); i++)
+		free(status_scheme[i]);
 	free(scheme);
+	free(tag_scheme);
+	free(status_scheme);
 	XDestroyWindow(dpy, wmcheckwin);
 	drw_free(drw);
 	XSync(dpy, False);
@@ -907,7 +913,7 @@ drawbar(Monitor *m)
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]) + tag_space;
         if (m->tagset[m->seltags] & 1 << i || occ & 1 << i)
-            drw_setscheme(drw, tag_scheme[i]);
+            drw_setscheme(drw, tag_scheme[i % LENGTH(tag_colors)]);
         else
             drw_setscheme(drw, scheme[TagSchemeNorm]);
 		drw_text(drw, x, 0, w, bh, (lrpad+tag_space) / 2, tags[i], urg & 1 << i);
@@ -2022,11 +2028,11 @@ setup(void)
 	scheme = ecalloc(LENGTH(colors), sizeof(Clr *));
 	for (i = 0; i < LENGTH(colors); i++)
 		scheme[i] = drw_scm_create(drw, colors[i], 3);
-	tag_scheme = ecalloc(LENGTH(tags), sizeof(Clr *));
-	for (i = 0; i < LENGTH(tags); i++)
+	tag_scheme = ecalloc(LENGTH(tag_colors), sizeof(Clr *));
+	for (i = 0; i < LENGTH(tag_colors); i++)
 		tag_scheme[i] = drw_scm_create(drw, tag_colors[i], 3);
-	status_scheme = ecalloc(LENGTH(tags), sizeof(Clr *));
-	for (i = 0; i < LENGTH(tags); i++)
+	status_scheme = ecalloc(LENGTH(status_colors), sizeof(Clr *));
+	for (i = 0; i < LENGTH(status_colors); i++)
 		status_scheme[i] = drw_scm_create(drw, status_colors[i], 3);
 	/* init bars */
 	updatebars();

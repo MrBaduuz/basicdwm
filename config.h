@@ -40,11 +40,6 @@ static const char *tag_colors[][3]  = {
     { col_yellow,  col_gray3, col_gray3 },
     { col_green,   col_gray3, col_gray3 },
     { col_magenta, col_gray3, col_gray3 },
-    { col_red,     col_gray3, col_gray3 },
-    { col_orange,  col_gray3, col_gray3 },
-    { col_yellow,  col_gray3, col_gray3 },
-    { col_green,   col_gray3, col_gray3 },
-    { col_magenta, col_gray3, col_gray3 }
 };
 
 static const char *status_colors[][3]  = {
@@ -54,11 +49,6 @@ static const char *status_colors[][3]  = {
     { col_yellow,  col_gray3, col_gray3 },
     { col_green,   col_gray3, col_gray3 },
     { col_magenta, col_gray3, col_gray3 },
-    { col_red,     col_gray3, col_gray3 },
-    { col_orange,  col_gray3, col_gray3 },
-    { col_yellow,  col_gray3, col_gray3 },
-    { col_green,   col_gray3, col_gray3 },
-    { col_magenta, col_gray3, col_gray3 }
 };
 
 /* tagging */

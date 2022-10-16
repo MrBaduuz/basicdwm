@@ -30,28 +30,12 @@ static const char *tag_colors[][3]  = {
 	/* fg        bg        border   */
 	{ col_cyan, col_gray1, col_cyan },
 	{ col_cyan, col_cyan,  col_cyan  },
-	{ col_cyan, col_gray1, col_cyan  },
-    { col_cyan, col_gray1, col_cyan },
-	{ col_cyan, col_gray1, col_cyan },
-	{ col_cyan, col_cyan,  col_cyan  },
-	{ col_cyan, col_gray1, col_cyan  },
-    { col_cyan, col_gray1, col_cyan },
-	{ col_cyan, col_gray1, col_cyan  },
-    { col_cyan, col_gray1, col_cyan }
 };
 
 static const char *status_colors[][3]  = {
 	/* fg        bg        border   */
 	{ col_cyan, col_gray1, col_cyan },
 	{ col_cyan, col_cyan,  col_cyan  },
-	{ col_cyan, col_gray1, col_cyan  },
-    { col_cyan, col_gray1, col_cyan },
-	{ col_cyan, col_gray1, col_cyan },
-	{ col_cyan, col_cyan,  col_cyan  },
-	{ col_cyan, col_gray1, col_cyan  },
-    { col_cyan, col_gray1, col_cyan },
-	{ col_cyan, col_gray1, col_cyan  },
-    { col_cyan, col_gray1, col_cyan }
 };
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };

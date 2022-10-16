@@ -25,7 +25,7 @@ static const char col_magenta[]     = "#b48ead";
 static const char col_blue1[]       = "#5e81ac";
 static const char col_blue2[]       = "#81a1c1";
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
+	/*                  fg         bg         border   */
 	[SchemeNorm]    = { col_white, col_gray3, col_gray3 },
 	[SchemeSel]     = { col_white, col_red  , col_red   },
 	[SchemeHid]     = { col_red,   col_gray3, col_gray3 },
@@ -109,7 +109,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-F", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray2, "-nf", col_white, "-sb", col_red, "-sf", col_white, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-i", "-F", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray2, "-nf", col_white, "-sb", col_red, "-sf", col_white, NULL };
+static const char *dmenu_desktop_cmd[] = { "j4-dmenu-desktop", "-i", "-F", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray2, "-nf", col_white, "-sb", col_red, "-sf", col_white, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 #include "movestack.c"
@@ -118,6 +119,7 @@ static const char *termcmd[]  = { "st", NULL };
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dmenu_desktop_cmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstackvis,  {.i = +1 } },

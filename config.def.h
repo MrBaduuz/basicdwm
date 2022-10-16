@@ -12,31 +12,44 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh            = 0;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm]    = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]     = { col_gray4, col_cyan,  col_cyan  },
-	[SchemeHid]     = { col_cyan,  col_gray1, col_cyan  },
-	[SchemeLayout]  = { col_gray3, col_gray1, col_gray2  },
-    [TagSchemeNorm] = { col_gray3, col_gray1, col_gray4 },
+static char col_black[]       = "#222222";
+static char col_gray[]        = "#444444";
+static char col_white[]       = "#bbbbbb";
+static char col_red[]         = "#ff0000";
+static char col_orange[]      = "#ff7f00";
+static char col_yellow[]      = "#ffff00";
+static char col_green[]       = "#00ff00";
+static char col_magenta[]     = "#ff00ff";
+static char col_blue[]        = "#0000ff";
+static char col_cyan[]        = "#005577";
+static char col_sel[]         = "#005577";
+static char *colors[][3]      = {
+	/*                  fg         bg         border   */
+	[SchemeNorm]    = { col_white, col_black, col_black },
+	[SchemeSel]     = { col_white, col_sel  , col_sel   },
+	[SchemeHid]     = { col_sel,   col_black, col_black },
+	[SchemeLayout]  = { col_blue, col_black, col_black },
+    [TagSchemeNorm] = { col_gray, col_black, col_black },
 };
 
-static const char *tag_colors[][3]  = {
-	/* fg        bg        border   */
-	{ col_cyan, col_gray1, col_cyan },
-	{ col_cyan, col_cyan,  col_cyan  },
+static char *tag_colors[][3]  = {
+	/* fg          bg         border   */
+    { col_red,     col_black, col_black },
+    { col_orange,  col_black, col_black },
+    { col_yellow,  col_black, col_black },
+    { col_green,   col_black, col_black },
+    { col_magenta, col_black, col_black },
 };
 
-static const char *status_colors[][3]  = {
-	/* fg        bg        border   */
-	{ col_cyan, col_gray1, col_cyan },
-	{ col_cyan, col_cyan,  col_cyan  },
+static char *status_colors[][3]  = {
+	/* fg          bg         border   */
+    { col_red,     col_black, col_black },
+    { col_orange,  col_black, col_black },
+    { col_yellow,  col_black, col_black },
+    { col_green,   col_black, col_black },
+    { col_magenta, col_black, col_black },
 };
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
@@ -78,7 +91,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_black, "-nf", col_white, "-sb", col_cyan, "-sf", col_white, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 #include "movestack.c"
@@ -124,6 +137,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
 	{ MODKEY|ShiftMask,             XK_n,      show,           {0} },
 	{ MODKEY,                       XK_n,      hide,           {0} },
 	TAGKEYS(                        XK_1,                      0)

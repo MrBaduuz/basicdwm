@@ -1,6 +1,5 @@
 /* See LICENSE file for copyright and license details. */
 
-
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 6;        /* gaps between windows */
@@ -13,42 +12,42 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh            = 0;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const char *fonts[]          = { "DejaVu Sans:size=10", "Fira Code:size=10.5", "Symbols Nerd Font:size=10.7" };
 static const char dmenufont[]       = "Fira Code:size=10";
-static const char col_gray1[]       = "#a6aab2";
-static const char col_gray2[]       = "#434c5e";
-static const char col_gray3[]       = "#3b4252";
-static const char col_white[]       = "#e5e9f0";
-static const char col_red[]         = "#bf6161";
-static const char col_orange[]      = "#d08770";
-static const char col_yellow[]      = "#ebcb8b";
-static const char col_green[]       = "#a3be8c";
-static const char col_magenta[]     = "#b48ead";
-static const char col_blue1[]       = "#5e81ac";
-static const char col_blue2[]       = "#81a1c1";
-static const char *colors[][3]      = {
+static char col_black[]       = "#3b4252";
+static char col_gray[]        = "#a6aab2";
+static char col_white[]       = "#e5e9f0";
+static char col_red[]         = "#bf6161";
+static char col_orange[]      = "#d08770";
+static char col_yellow[]      = "#ebcb8b";
+static char col_green[]       = "#a3be8c";
+static char col_magenta[]     = "#b48ead";
+static char col_blue[]        = "#5e81ac";
+static char col_cyan[]        = "#81a1c1";
+static char col_sel[]         = "#bf6161";
+static char *colors[][3]      = {
 	/*                  fg         bg         border   */
-	[SchemeNorm]    = { col_white, col_gray3, col_gray3 },
-	[SchemeSel]     = { col_white, col_red  , col_red   },
-	[SchemeHid]     = { col_red,   col_gray3, col_gray3 },
-	[SchemeLayout]  = { col_blue1, col_gray3, col_gray3 },
-    [TagSchemeNorm] = { col_gray1, col_gray3, col_gray3 },
+	[SchemeNorm]    = { col_white, col_black, col_black },
+	[SchemeSel]     = { col_white, col_sel  , col_sel   },
+	[SchemeHid]     = { col_sel,   col_black, col_black },
+	[SchemeLayout]  = { col_blue,  col_black, col_black },
+    [TagSchemeNorm] = { col_gray,  col_black, col_black },
 };
 
-static const char *tag_colors[][3]  = {
+static char *tag_colors[][3]  = {
 	/* fg          bg         border   */
-    { col_red,     col_gray3, col_gray3 },
-    { col_orange,  col_gray3, col_gray3 },
-    { col_yellow,  col_gray3, col_gray3 },
-    { col_green,   col_gray3, col_gray3 },
-    { col_magenta, col_gray3, col_gray3 },
+    { col_red,     col_black, col_black },
+    { col_orange,  col_black, col_black },
+    { col_yellow,  col_black, col_black },
+    { col_green,   col_black, col_black },
+    { col_magenta, col_black, col_black },
 };
 
-static const char *status_colors[][3]  = {
+static char *status_colors[][3]  = {
 	/* fg          bg         border   */
-    { col_red,     col_gray3, col_gray3 },
-    { col_orange,  col_gray3, col_gray3 },
-    { col_yellow,  col_gray3, col_gray3 },
-    { col_green,   col_gray3, col_gray3 },
-    { col_magenta, col_gray3, col_gray3 },
+    { col_red,     col_black, col_black },
+    { col_orange,  col_black, col_black },
+    { col_yellow,  col_black, col_black },
+    { col_green,   col_black, col_black },
+    { col_magenta, col_black, col_black },
 };
 
 /* tagging */
@@ -56,19 +55,19 @@ static const char *tags[] = { "", "", "", "", "", "", "", "
 
 static const Rule rules[] = {
 	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
-	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-    { NULL,      NULL,     NULL,           0,         0,          0,           1,        -1 }, /* by default no swallowing */
-	{ "Gimp",    NULL,     NULL,           1 << 7,         0,          0,           0,        -1 },
-	{ "firefox", NULL,     NULL,           1 << 2,    0,          0,          -1,        -1 },
-	{ "st-256color", NULL, NULL,           0,         0,          1,           0,        -1 },
-    /* swallow */
-    { "mpv",     NULL,     NULL,           0,         0,          0,           0,        -1 },
-    { "Sxiv",    NULL,     NULL,           0,         0,          0,           0,        -1 },
-    { "pcmanfm", NULL,     NULL,        0,         0,          0,           0,        -1 },
-    { "Zathura", NULL,     NULL,        0,         0,          0,           0,        -1 },
+	*	WM_CLASS(STRING) = instance, class
+	*	WM_NAME(STRING) = title
+	*/
+	/* class     instance  title        tags mask  isfloating  isterminal  noswallow  monitor */
+	{ NULL,      NULL,     NULL,        0,         0,          0,           1,        -1 }, /* by default no swallowing */
+	{ "Gimp",    NULL,     NULL,        1 << 7,    0,          0,           0,        -1 },
+	{ "firefox", NULL,     NULL,        1 << 2,    0,          0,          -1,        -1 },
+	{ "st-256color", NULL, NULL,        0,         0,          1,           0,        -1 },
+	/* swallow */
+	{ "mpv",     NULL,     NULL,        0,         0,          0,           0,        -1 },
+	{ "Sxiv",    NULL,     NULL,        0,         0,          0,           0,        -1 },
+	{ "pcmanfm", NULL,     NULL,        0,         0,          0,           0,        -1 },
+	{ "Zathura", NULL,     NULL,        0,         0,          0,           0,        -1 },
 };
 
 /* layout(s) */
@@ -99,8 +98,8 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-i", "-F", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray2, "-nf", col_white, "-sb", col_red, "-sf", col_white, NULL };
-static const char *dmenu_desktop_cmd[] = { "j4-dmenu-desktop", "-i", "-F", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray2, "-nf", col_white, "-sb", col_red, "-sf", col_white, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-i", "-F", "-m", dmenumon, "-fn", dmenufont, "-nb", col_black, "-nf", col_white, "-sb", col_sel, "-sf", col_white, NULL };
+static const char *dmenu_desktop_cmd[] = { "j4-dmenu-desktop", "-i", "-F", "-m", dmenumon, "-fn", dmenufont, "-nb", col_black, "-nf", col_white, "-sb", col_sel, "-sf", col_white, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 #include "movestack.c"
@@ -150,6 +149,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
 	{ MODKEY|ShiftMask,             XK_n,      show,           {0} },
 	{ MODKEY,                       XK_n,      hide,           {0} },
 	TAGKEYS(                        XK_1,                      0)

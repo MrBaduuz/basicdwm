@@ -1345,17 +1345,17 @@ loadxrdb()
       xrdb = XrmGetStringDatabase(resm);
 
       if (xrdb != NULL) {
-        XRDB_LOAD_COLOR("dwm.black", col_black);
-        XRDB_LOAD_COLOR("dwm.gray", col_gray);
-        XRDB_LOAD_COLOR("dwm.white", col_white);
-        XRDB_LOAD_COLOR("dwm.red", col_red);
-        XRDB_LOAD_COLOR("dwm.orange", col_orange);
-        XRDB_LOAD_COLOR("dwm.yellow", col_yellow);
-        XRDB_LOAD_COLOR("dwm.green", col_green);
-        XRDB_LOAD_COLOR("dwm.magenta", col_magenta);
-        XRDB_LOAD_COLOR("dwm.blue", col_blue);
-        XRDB_LOAD_COLOR("dwm.cyan", col_cyan);
-        XRDB_LOAD_COLOR("dwm.selected", col_sel);
+        XRDB_LOAD_COLOR("color0", col_black);
+        XRDB_LOAD_COLOR("color7", col_gray);
+        XRDB_LOAD_COLOR("color15", col_white);
+        XRDB_LOAD_COLOR("color1", col_red);
+        XRDB_LOAD_COLOR("color3", col_orange);
+        XRDB_LOAD_COLOR("color11", col_yellow);
+        XRDB_LOAD_COLOR("color2", col_green);
+        XRDB_LOAD_COLOR("color5", col_magenta);
+        XRDB_LOAD_COLOR("color4", col_blue);
+        XRDB_LOAD_COLOR("color6", col_cyan);
+        XRDB_LOAD_COLOR("activeColor", col_sel);
       }
     }
   }

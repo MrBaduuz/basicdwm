@@ -59,10 +59,12 @@ static const Rule rules[] = {
 	*	WM_NAME(STRING) = title
 	*/
 	/* class     instance  title        tags mask  isfloating  isterminal  noswallow  monitor */
-	{ NULL,      NULL,     NULL,        0,         0,          0,           1,        -1 }, /* by default no swallowing */
+    /* by default no swallowing */
+	{ NULL,      NULL,     NULL,        0,         0,          0,           1,        -1 },
+
 	{ "Gimp",    NULL,     NULL,        1 << 7,    0,          0,           0,        -1 },
-	{ "firefox", NULL,     NULL,        1 << 2,    0,          0,          -1,        -1 },
-	{ "st-256color", NULL, NULL,        0,         0,          1,           0,        -1 },
+	{ "firefox", NULL,     NULL,        1 << 2,    0,          0,           1,        -1 },
+	{ "St",      NULL,     NULL,        0,         0,          1,           0,        -1 },
 	/* swallow */
 	{ "mpv",     NULL,     NULL,        0,         0,          0,           0,        -1 },
 	{ "Sxiv",    NULL,     NULL,        0,         0,          0,           0,        -1 },

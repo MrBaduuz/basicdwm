@@ -1092,8 +1092,12 @@ focusstack(int inc, int hid)
 {
 	Client *c = NULL, *i;
 
-	if ((!selmon->sel && !hid) || (selmon->sel->isfullscreen && lockfullscreen))
-		return;
+	if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen)) {
+		if (hid) 
+			show((const Arg *){0});
+		else
+			return;
+	}
 	if (!selmon->clients)
 		return;
 

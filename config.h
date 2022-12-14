@@ -9,9 +9,9 @@ static const unsigned int status_space = 8;     /* spacing between status items 
 static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int vertpad            = 6;       /* vertical padding of bar */
-static const int sidepad            = 6;       /* horizontal padding of bar */
-static const int user_bh            = 0;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
+static const int vertpad            = 0;       /* vertical padding of bar */
+static const int sidepad            = 0;       /* horizontal padding of bar */
+static const int user_bh            = 25;       /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const char *fonts[]          = { "DejaVu Sans:size=10", "Fira Code:size=10.5", "Symbols Nerd Font:size=10.7" };
 static const char dmenufont[]       = "Fira Code:size=10";
 static char col_black[]       = "#3b4252";
@@ -53,7 +53,7 @@ static char *status_colors[][3]  = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "", "", "阮" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -62,16 +62,19 @@ static const Rule rules[] = {
 	*/
 	/* class     instance  title        tags mask  isfloating  isterminal  noswallow  monitor */
     /* by default no swallowing */
-	{ NULL,      NULL,     NULL,        0,         0,          0,           1,        -1 },
+	{ NULL,       NULL,     NULL,        0,         0,          0,           1,        -1 },
 
-	{ "Gimp",    NULL,     NULL,        1 << 7,    0,          0,           0,        -1 },
-	{ "firefox", NULL,     NULL,        1 << 2,    0,          0,           1,        -1 },
-	{ "St",      NULL,     NULL,        0,         0,          1,           0,        -1 },
-	/* swallow */
-	{ "mpv",     NULL,     NULL,        0,         0,          0,           0,        -1 },
-	{ "Sxiv",    NULL,     NULL,        0,         0,          0,           0,        -1 },
-	{ "pcmanfm", NULL,     NULL,        0,         0,          0,           0,        -1 },
-	{ "Zathura", NULL,     NULL,        0,         0,          0,           0,        -1 },
+	{ "Gimp",     NULL,     NULL,        1 << 7,    0,          0,           0,        -1 },
+	{ "firefox",  NULL,     NULL,        1 << 2,    0,          0,           1,        -1 },
+	{ "St",       NULL,     NULL,        0,         0,          1,           0,        -1 },
+	/* swallow */ 
+	{ "mpv",      NULL,     NULL,        0,         0,          0,           0,        -1 },
+	{ "Sxiv",     NULL,     NULL,        0,         0,          0,           0,        -1 },
+	{ "pcmanfm",  NULL,     NULL,        0,         0,          0,           0,        -1 },
+	{ "Zathura",  NULL,     NULL,        0,         0,          0,           0,        -1 },
+	{ "spotify",  NULL,	    NULL,        1 << 8,    0,          0,           0,        -1 },
+	{ NULL,       NULL,"Spotify",        1 << 8,    0,          0,           0,        -1 },
+	{ "Psst-gui", NULL,	    NULL,        1 << 8,    0,          0,           0,        -1 }
 };
 
 /* layout(s) */
